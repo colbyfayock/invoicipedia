@@ -26,6 +26,26 @@ XATA_BRANCH=main
 XATA_API_KEY=
 ```
 
+### Install Dependencies
+
+```
+npm install --legacy-peer-deps
+```
+
+`--legacy-peer-deps` is currently required because of conflicts due to the @rc versions of React and Next.js.
+
+#### Xata
+
+If using your own environment, install the Xata CLI and run codegen:
+
+```
+xata codegen --output ./src/db/xata.ts
+```
+
+#### Clerk
+
+* Enable Organizations
+
 ### Generate & Run Migrations
 
 ```
