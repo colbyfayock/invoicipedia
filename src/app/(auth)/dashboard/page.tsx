@@ -46,7 +46,7 @@ export default async function Dashboard({ searchParams }: { searchParams: { page
       .offset(queryOffset);
   }
 
-  const invoices = result.map(({ invoices, customers}) => {
+  const invoices = result?.map(({ invoices, customers}) => {
     return {
       ...invoices,
       customer: customers
@@ -80,7 +80,7 @@ export default async function Dashboard({ searchParams }: { searchParams: { page
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map(invoice => {
+          {invoices?.map(invoice => {
             const status = AVAILABLE_STATUSES.find(status => status.id === invoice.status);
             return (
               <TableRow key={invoice.id}>
@@ -126,7 +126,7 @@ export default async function Dashboard({ searchParams }: { searchParams: { page
               </TableRow>
             )
           })}
-          {invoices.length % INVOICES_PER_PAGE !== 0 && [...new Array(INVOICES_PER_PAGE - invoices.length)].map((_, index) => {
+          {invoices && invoices.length % INVOICES_PER_PAGE !== 0 && [...new Array(INVOICES_PER_PAGE - invoices.length)].map((_, index) => {
             return (
               <TableRow key={index} className="border-transparent bg-transparent hover:bg-transparent" aria-hidden>
                 <TableCell className="hidden md:table-cell p-0">&nbsp;</TableCell>

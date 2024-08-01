@@ -53,7 +53,7 @@ async function Pagination({ className, path, itemsPerPage, currentPage, getCount
             { [...new Array(Math.ceil(count / itemsPerPage))].map((_, index) => {
               const page = index + 1;
               return (
-                <li>
+                <li key={page}>
                   <Button asChild variant={page === currentPage ? 'default' : 'outline'} size="sm" className={`h-auto px-2.5 py-1`}>
                     <Link href={{
                       pathname: path,
