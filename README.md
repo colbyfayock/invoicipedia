@@ -19,11 +19,6 @@ DATABASE_URL=
 
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_SECRET_KEY=
-
-# [Xata] Configuration used by the CLI and the SDK
-# Make sure your framework/tooling loads this file on startup to have it available for the SDK
-XATA_BRANCH=main
-XATA_API_KEY=
 ```
 
 ### Install Dependencies
@@ -33,14 +28,6 @@ npm install --legacy-peer-deps
 ```
 
 `--legacy-peer-deps` is currently required because of conflicts due to the @rc versions of React and Next.js.
-
-#### Xata
-
-If using your own environment, install the Xata CLI and run codegen:
-
-```
-xata codegen --output ./src/db/xata.ts
-```
 
 #### Clerk
 

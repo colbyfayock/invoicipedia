@@ -1,6 +1,0 @@
-{
-  "databaseURL": "https://Test-Invoices-u67f31.us-east-1.xata.sh/db/test-invoices",
-  "codegen": {
-    "output": "src/db/xata.ts"
-  }
-}
