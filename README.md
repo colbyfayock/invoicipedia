@@ -29,6 +29,10 @@ npm install --legacy-peer-deps
 
 `--legacy-peer-deps` is currently required because of conflicts due to the @rc versions of React and Next.js.
 
+#### Xata
+
+Select Postgres option when creating a new database
+
 #### Clerk
 
 * Enable Organizations
