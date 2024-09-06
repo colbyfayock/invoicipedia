@@ -6,15 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "email": "email dev --dir ./src/emails"
   },
   "dependencies": {
     "@clerk/elements": "^0.9.1",
-    "@clerk/nextjs": "^5.3.0",
+    "@clerk/nextjs": "^5.4.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@react-email/components": "0.0.25",
     "@stripe/stripe-js": "^3.5.0",
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.1",
@@ -29,6 +31,7 @@
     "postcss": "^8.4.38",
     "react": "^19.0.0-rc-3208e73e-20240730",
     "react-dom": "^19.0.0-rc-3208e73e-20240730",
+    "resend": "^4.0.0",
     "stripe": "^15.11.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
@@ -38,6 +41,7 @@
   "devDependencies": {
     "@types/pg": "^8.11.6",
     "dotenv": "^16.4.5",
-    "drizzle-kit": "^0.23.0"
+    "drizzle-kit": "^0.23.0",
+    "react-email": "3.0.1"
   }
 }

@@ -3,21 +3,25 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers'
-import { auth } from '@clerk/nextjs/server';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 import { and, eq, isNull } from 'drizzle-orm';
 import Stripe from 'stripe';
+import { Resend } from 'resend';
 
 import { Invoices, Customers, Status } from '@/db/schema';
 import { db } from '@/db';
 
+import InvoiceCreatedTemplate from '@/emails/InvoiceCreatedTemplate';
+
 const stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY));
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
  * createInvoice
  */
 
 export async function createInvoice(formData: FormData) {
-  const { userId, orgId } = auth()
+  const { userId, orgId, ...rest } = auth()
   
   if ( !userId ) throw new Error('User not found');
 
@@ -51,6 +55,34 @@ export async function createInvoice(formData: FormData) {
     }).returning({
       id: Invoices.id
     });
+    
+
+  let fromName = 'Invoicipedia';
+
+  if ( orgId ) {
+    const organization = await clerkClient().organizations.getOrganization({
+      organizationId: orgId
+    });
+    fromName = organization.name;
+  } else {
+    const user = await clerkClient().users.getUser(userId);
+    fromName = `${user.firstName} ${user.lastName}`;
+  }
+
+  const { data, error } = await resend.emails.send({
+    from: `${fromName} <hello@test.spacejelly.dev>`,
+    to: [email],
+    subject: `New Invoice from ${fromName}`,
+    react: InvoiceCreatedTemplate({
+      fromName,
+      name,
+      invoiceId: results[0].id,
+      value
+    }),
+  });
+
+  console.log('data', data)
+  console.log('error', error)
 
   redirect(`/invoices/${results[0].id}`);
 }
