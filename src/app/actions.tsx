@@ -69,7 +69,7 @@ export async function createInvoice(formData: FormData) {
     fromName = `${user.firstName} ${user.lastName}`;
   }
 
-  const { data, error } = await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: `${fromName} <hello@test.spacejelly.dev>`,
     to: [email],
     subject: `New Invoice from ${fromName}`,
@@ -81,8 +81,9 @@ export async function createInvoice(formData: FormData) {
     }),
   });
 
-  console.log('data', data)
-  console.log('error', error)
+  if ( error ) {
+    console.log('Something went wrong went sending email', error);
+  }
 
   redirect(`/invoices/${results[0].id}`);
 }

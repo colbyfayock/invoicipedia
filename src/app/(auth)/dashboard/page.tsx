@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { PlusCircle } from 'lucide-react';
-import { auth, clerkClient } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 
 import { eq, and, isNull, count } from 'drizzle-orm'
 
